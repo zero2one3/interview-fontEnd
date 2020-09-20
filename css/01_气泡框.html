@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用css实现气泡框效果</title>
+    <style>
+        .example{
+            background-color: green;
+            color: white;
+            display: inline-block;
+            padding: 0 .7em;
+            height: 2em;
+            line-height: 2em;
+            border-radius: 10px;
+            position: relative;
+        }
+        .example::before{
+            position: absolute;
+            content: '';
+            height: 0;
+            width: 0;
+            right: 10px;
+            top: 1.5em;
+            border-width: 1em;
+            border-style: solid;
+            border-color: green transparent transparent transparent;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="example">Hello CSS!</div>
+</body>
+</html>

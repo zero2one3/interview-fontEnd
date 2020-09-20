@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用css实现0.5px大小的线条</title>
+    <style>
+        .example1, .example2{
+            width: 300px;
+            height: 200px;
+        }
+        .example1{
+            border: 1px solid black;
+        }
+        .example2{
+            position: relative;
+            margin-top: 10px;
+        }
+        .example2::before{
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            border: 1px solid black;
+            top: 0;
+            left: 0;
+            transform-origin: top left;
+            transform: scale(.5);
+        }
+    </style>
+</head>
+<body>
+    <div style="font-size:40px">建议放大观察两者区别</div>
+
+    <!-- 1px线条 -->
+    <div class="example1"></div>
+
+    <!-- 0.5px线条 -->
+    <div class="example2"></div>
+</body>
+</html>
