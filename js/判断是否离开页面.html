@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>判断用户是否离开页面</title>
+</head>
+<body>
+    <script>
+        /*  实现该功能：当用户离开页面时, 打印 '离开页面' ; 当用户回到页面时, 打印 '回到页面'   */
+
+        document.addEventListener('visibilitychange', function() {
+            if(document.visibilityState == 'hidden') {
+                console.log('离开页面');
+            } else {
+                console.log('回到页面');
+            }
+        })
+    </script>
+</body>
+</html>
