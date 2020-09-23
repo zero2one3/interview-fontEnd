@@ -3,8 +3,11 @@ import Vue from './Vue'
 const vm = new Vue({
     el: '#app',
     data: {
-        message: '我是双向绑定数据message'
+        message: {
+            name: '张三'
+        }
     }
 })
 
 window.$vm = vm
+

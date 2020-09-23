@@ -1,6 +1,5 @@
 class Dep{
-    constructor(name) {
-        this.name = name
+    constructor() {
         this.Observers = []
     }
     on(observer) {

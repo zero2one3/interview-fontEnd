@@ -19,6 +19,28 @@ class Compiler{
         }
 
         return frag
+    }
+    _getAllNames(value) {
+        
+        let string = value.replace(/\./g, ',')
+
+        while(string.match(/\[/) && string.match(/\]/)) {
+            string = string.replace(/\[/, ',')
+            string = string.replace(/\]/, '')
+        }
+
+        let ret = string.match(/'|"/)
+
+        while(ret) {
+            string = string.replace(/'|"/, '')
+
+            ret = string.match(/'|"/)
+        }
+
+        let res = string.split(',')
+
+        return res
+
     } 
     _complie(node) {
         let _this = this
@@ -26,19 +48,36 @@ class Compiler{
             let attr = node.attributes
             if(attr.hasOwnProperty('v-model')) {
                 let name = attr['v-model'].value
-                node.oninput = function(e) {
-                    _this.vm[name] = e.target.value
+                let string = '_this.vm'
+                let arr = [...this._getAllNames(name)]
+                for(let i in arr) {
+                    string += `['${arr[i]}']`
                 }
-                node.value = this.vm[name]
+                node.oninput = function(e) {
+                    eval(`${string} = e.target.value`)
+                }
+                console.log(string);
+                node.value = eval(string)
             }
             
         } else if(node.nodeType === 3) {
-            let ret = node.nodeValue.match(REG)
-            if(ret) {
-                let name = ret[1]
-                name = name.trim()
-                new Watcher(node, name, this.vm)
+            let ret_totale = node.nodeValue.match(REG)
+            if(!ret_totale) return;
+
+            let string = ret_totale[1]
+            string = string.trim()  
+            
+            let obj = {
+                each: []
             }
+            
+            let allNames = this._getAllNames(string)
+            obj.each = [...allNames]
+            
+            new Watcher(node, obj, this.vm)
+            
+            
+            
         }
     }
 }
