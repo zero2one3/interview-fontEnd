@@ -10,7 +10,7 @@ function deepCopy(obj, cache = new WeakMap()) {
     // 支持函数
     if(obj instanceof Function) {
         return function() {
-            obj.apply(this, arguments)
+            obj.call(this, ...arguments)
         }
     }
 
