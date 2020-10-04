@@ -2,7 +2,6 @@
 
 function fibonacci1(n) {
     if(n === 1 | n === 2) return 1;
-    if(n === 3) return 2;
 
     return fibonacci1(n - 1) + fibonacci1(n - 2)
 }
