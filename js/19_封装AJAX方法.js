@@ -28,7 +28,7 @@ let $ = {
 		xhr.send()
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState === 4) {
-				if(xhr.status == 200 || xhr.status == 304) {
+				if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
 					let res = dataType === 'json' ? JSON.parse(xhr.responseText) : xhr.responseText
 					callback(res, xhr.status, xhr)
 				}
@@ -49,7 +49,7 @@ let $ = {
 		xhr.send(str)
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState === 4) {
-				if(xhr.status == 200 || xhr.status == 304) {
+				if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
 					let res = dataType === 'json' ? JSON.parse(xhr.responseText) : xhr.responseText
 					callback(res, xhr.status, xhr)
 				}
@@ -87,7 +87,7 @@ let $ = {
 
 			xhr.onreadystatechange = function() {
 				if(xhr.readyState === 4) {
-					if(xhr.status == 200 || xhr.status == 304) {
+					if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
 						let res = dataType === 'json' ? JSON.parse(xhr.responseText) : xhr.responseText
 						resolve(res) // 请求成功，返回数据
 					} else {
