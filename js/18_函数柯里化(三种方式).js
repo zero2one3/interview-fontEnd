@@ -59,16 +59,16 @@ function add2() {
 /* 第三种add()函数柯里化方式
    缺点：在刚开始传参之前，设定总共需要传入参数的个数
 */
-function curry(func, length) {
+function curry(length) {
 
-    let args = [...arguments].slice(2)
+    let args = [...arguments].slice(1)
 
     return function() {
         args = args.concat([...arguments])
         if(arguments.length < length) {
-            return curry.apply(this, [func, length - arguments.length].concat(args))
+            return curry.apply(this, [length - arguments.length].concat(args))
         } else {
-            return func.apply(this, args)
+            return args.reduce((a, b) => a + b)
         }
     }
 }
@@ -77,9 +77,7 @@ function curry(func, length) {
 let res = add(1, 2, 3, 4, 5)
 let res1 = add1(1)(2)(3)(4)(5)
 let res2 = add2(1)(2, 3, 4)(5)()
-let res3 = curry(function() {
-    return [...arguments].reduce((a, b) => a + b)
-}, 5)
+let res3 = curry(5)
 
 console.log(res);
 console.log(res1);
