@@ -3,7 +3,7 @@
 Function.prototype.myApply = function(context) {
 
     // 存储要转移的目标对象
-    _this = context? Object(context) : window
+    let _this = context? Object(context) : window
 
     // 在转移this的对象上设定一个独一无二的属性 , 并将函数赋值给它
     let key = Symbol('key')

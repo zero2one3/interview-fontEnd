@@ -9,11 +9,13 @@ Function.prototype.myBind = function(context) {
     let key = Symbol('key')
     _this[key] = this
 
+    let args = arguments.length > 1 ? [...arguments].slice(1) : []
+
     // 创建函数闭包
     return function() {
 
         // 将所有参数先拆分开，再添加到新数组中，以此来支持多参数传入以及数组参数传入的需求
-        let args = [].concat(...arguments)
+        args = args.concat([...arguments])
 
         // 调用函数
         let res = _this[key](...args)
@@ -37,4 +39,4 @@ function showName(first, second, third) {
     console.log(this.name);
 }
 
-showName.myBind(obj)([7,8,9])
+showName.myBind(obj, 7)(8, 9)
